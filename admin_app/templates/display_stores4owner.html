@@ -1,0 +1,210 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>Welcome to My Store Product Page</title>
+{% endblock %}
+{% block content %}
+<ul class="pcoded-item pcoded-left-item">
+    <li class="">
+        <a href="{% url 'index_page' %}" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+            <span class="pcoded-mtext">Dashboard</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+    </li>
+</ul>
+<div class="pcoded-navigation-label">My Store</div>
+<ul class="pcoded-item pcoded-left-item">
+    <li class="pcoded-hasmenu">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>
+            <span class="pcoded-mtext">My Store</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+        <ul class="pcoded-submenu">
+            <li class="">
+                <a href="{% url 'storeowner_managestore' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Manage Store</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="pcoded-navigation-label">My Store Products</div>
+<ul class="pcoded-item pcoded-left-item">
+    <li class="pcoded-hasmenu active pcoded-trigger">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-id-badge"></i><b>BC</b></span>
+            <span class="pcoded-mtext">My Store Products</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+        <ul class="pcoded-submenu">
+            <li class="active">
+                <a href="{% url 'display_stores_4owner' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Manage Products</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <!-- <li class="">
+                <a href="{% url 'admin_page_stores_list' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Stores</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li> -->
+
+        </ul>
+    </li>
+</ul>
+</nav>
+<div class="pcoded-content">
+    <!-- Page-header start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">My Store Products</h5>
+                        <p class="m-b-0">Choose Store for Adding Store Products</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'index_page' %}"> <i class="fa fa-home"></i> </a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">My Store Products</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Store Owners</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page-header end -->
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-body start -->
+                <div class="page-body">
+                    <div class="row">
+
+
+
+                        <!--  sale analytics start -->
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Update Stocks Products</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i>
+                                            </li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <li><i class="fa fa-trash close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+
+
+                                    <div class="row" style="padding: 2cap;">
+                                        <!-- sale card start -->
+                                        {% for i in owners_store %}
+                                        <div class="col-md-6">
+                                            <a href="{% url 'storeowner_managestocks' i.id %}">
+                                                <div class="card text-center order-visitor-card">
+                                                    <div class="card-block">
+                                                        <h4 class="m-t-15 m-b-15">{{ i.store_name }}</h4>
+                                                        <span>
+                                                            <h6 class="m-b-0">Branch</h6>
+                                                            <p class="m-b-0">{{ i.store_location }}</p>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        </a>
+                                        {% endfor %}
+                                        
+                                        <!-- <div class="col-md-6">
+                                            <div class="card text-center order-visitor-card">
+                                                <div class="card-block">
+                                                    <h6 class="m-b-0">Order Status</h6>
+                                                    <h4 class="m-t-15 m-b-15"><i
+                                                            class="fa fa-arrow-up m-r-15 text-c-green"></i>6325
+                                                    </h4>
+                                                    <p class="m-b-0">36% From Last 6 Months</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>ADD Products</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i>
+                                            </li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <li><i class="fa fa-trash close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+
+
+                                    <div class="row" style="padding: 2cap;">
+                                        <!-- sale card start -->
+                                        {% for i in owners_store %}
+                                        <div class="col-md-6">
+                                            <a href="{% url 'storeowner_manageproducts' i.id %}">
+                                                <div class="card text-center order-visitor-card">
+                                                    <div class="card-block">
+                                                        <h4 class="m-t-15 m-b-15">{{ i.store_name }}</h4>
+                                                        <span>
+                                                            <h6 class="m-b-0">Branch</h6>
+                                                            <p class="m-b-0">{{ i.store_location }}</p>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        </a>
+                                        {% endfor %}
+                                        
+                                        <!-- <div class="col-md-6">
+                                            <div class="card text-center order-visitor-card">
+                                                <div class="card-block">
+                                                    <h6 class="m-b-0">Order Status</h6>
+                                                    <h4 class="m-t-15 m-b-15"><i
+                                                            class="fa fa-arrow-up m-r-15 text-c-green"></i>6325
+                                                    </h4>
+                                                    <p class="m-b-0">36% From Last 6 Months</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

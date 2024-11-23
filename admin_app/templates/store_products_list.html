@@ -1,0 +1,193 @@
+{% extends 'admin_index.html' %}
+{% load static %}
+{% block title %}
+<title>Welcome to Store Details Page</title>
+{% endblock %}
+{% block content %}
+<ul class="pcoded-item pcoded-left-item">
+    <li class="">
+        <a href="{% url 'admin_index' %}" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+            <span class="pcoded-mtext">Dashboard</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+    </li>
+</ul>
+<div class="pcoded-navigation-label">Product Catalog</div>
+<ul class="pcoded-item pcoded-left-item">
+    <li class="pcoded-hasmenu">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>
+            <span class="pcoded-mtext">Product Catalog</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+        <ul class="pcoded-submenu">
+            <li class="">
+                <a href="{% url 'admin_page_type_of_product' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Product-Type</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+             <li class="">
+                <a href="{% url 'admin_page_category' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Category</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'admin_page_cut_type' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Cut-Type</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="pcoded-navigation-label">Store Details</div>
+<ul class="pcoded-item pcoded-left-item">
+    <li class="pcoded-hasmenu active pcoded-trigger">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-id-badge"></i><b>BC</b></span>
+            <span class="pcoded-mtext">Store Details</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+        <ul class="pcoded-submenu">
+             <li class="">
+                <a href="{% url 'admin_page_store_owner_list' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Store Owners</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'admin_page_stores_list' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Stores</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="{% url 'admin_page_store_products' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Store-Products</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+</nav>
+<div class="pcoded-content">
+<!-- Page-header start -->
+<div class="page-header">
+<div class="page-block">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <div class="page-header-title">
+                <h5 class="m-b-10">Stores Details</h5>
+                <p class="m-b-0">Table of Stores</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'admin_index' %}"> <i class="fa fa-home"></i> </a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Store Details</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Stores</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Page-header end -->
+<div class="pcoded-inner-content">
+<!-- Main-body start -->
+<div class="main-body">
+    <div class="page-wrapper">
+
+        <!-- Page body start -->
+        <div class="page-body">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Stores</h5>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                            <li><i class="fa fa-minus minimize-card"></i></li>
+                            <li><i class="fa fa-refresh reload-card"></i></li>
+                            <li><i class="fa fa-trash close-card"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-block table-border-style">
+                    <div class="table-responsive">
+                        {% if store_products %}
+                        <table class="table table-hover" border="2">
+                            <thead>
+                                <tr>
+                                    <th rowspan='2'>#</th>
+                                    <th rowspan='2'>Store-Name</th>
+                                    <th rowspan='2'>Product-Name</th>
+                                    <th rowspan="2">Category</th>
+                                    <th rowspan='2'>MRP</th>
+                                    <th rowspan='2'>Quantity-Availability</th>
+                                    <th colspan='2'>Type & Price</th>
+                                    <th rowspan='2'>Product-Image</th>
+                                </tr>
+                                <tr>
+                                    <th>Cut-Type</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in store_products %}
+                                    {% with cut_price_count=i.store_product_cutprice_set.count %}
+                                        {% for cut_price in i.store_product_cutprice_set.all %}
+                                            <tr>
+                                                {% if forloop.first %}
+                                                    <th scope="row" rowspan="{{ cut_price_count }}">{{ i.id }}</th>
+                                                    <td rowspan="{{ cut_price_count }}">{{ i.store_name }}</td>
+                                                    <td rowspan="{{ cut_price_count }}">{{ i.product_name }}</td>
+                                                    <td rowspan="{{ cut_price_count }}">{{ i.category }}</td>
+                                                    <td rowspan="{{ cut_price_count }}">{{ i.mrp }}</td>
+                                                    <td rowspan="{{ cut_price_count }}">{{ i.product_available_quantity }}</td>
+                                                    <td>{{ cut_price.cut_type }}</td>
+                                                    <td>{{ cut_price.product_price }}</td>
+                                                    <td rowspan="{{ cut_price_count }}">
+                                                        <img src="{{ i.product_image.url }}" alt="{{ i.product_name }}" width="50" height="50">
+                                                    </td>
+                                                {% else %}
+                                                    <td>{{ cut_price.cut_type }}</td>
+                                                    <td>{{ cut_price.product_price }}</td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% endwith %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        {% else %}
+                        <p>No table found</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page body end -->
+    </div>
+</div>
+<!-- Main-body end -->
+<div id="styleSelector">
+
+</div>
+</div>
+</div>
+{% endblock %}

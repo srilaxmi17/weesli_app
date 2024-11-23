@@ -1,0 +1,348 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>Welcome to My Store Product Page</title>
+{% endblock %}
+{% block content %}
+<ul class="pcoded-item pcoded-left-item">
+    <li class="">
+        <a href="{% url 'index_page' %}" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+            <span class="pcoded-mtext">Dashboard</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+    </li>
+</ul>
+<div class="pcoded-navigation-label">My Store</div>
+<ul class="pcoded-item pcoded-left-item">
+    <li class="pcoded-hasmenu">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>BC</b></span>
+            <span class="pcoded-mtext">My Store</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+        <ul class="pcoded-submenu">
+            <li class="">
+                <a href="{% url 'storeowner_managestore' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Manage Store</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="pcoded-navigation-label">My Store Products</div>
+<ul class="pcoded-item pcoded-left-item">
+    <li class="pcoded-hasmenu active pcoded-trigger">
+        <a href="javascript:void(0)" class="waves-effect waves-dark">
+            <span class="pcoded-micon"><i class="ti-id-badge"></i><b>BC</b></span>
+            <span class="pcoded-mtext">My Store Products</span>
+            <span class="pcoded-mcaret"></span>
+        </a>
+        <ul class="pcoded-submenu">
+            <li class="active">
+                <a href="{% url 'display_stores_4owner' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Manage Products</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <!-- <li class="">
+                <a href="{% url 'admin_page_stores_list' %}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                    <span class="pcoded-mtext">Stores</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li> -->
+
+        </ul>
+    </li>
+</ul>
+</nav>
+<div class="pcoded-content">
+    <!-- Page-header start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">My Store Products</h5>
+                        <p class="m-b-0">Forms for Adding My Store Products</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'index_page' %}"> <i class="fa fa-home"></i> </a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="{% url 'display_stores_4owner' %}">My Store Products</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Store Owners</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page-header end -->
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <!-- Page body start -->
+                <div class="page-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Add Type of Cut</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-minus minimize-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                            <li><i class="fa fa-trash close-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <form method="post" action="{% url 'storeowner_manageproducts' store_id %}"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <!-- <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Store Name</label>
+                                            <div class="col-sm-10">
+                                                <select name="store_name" class="form-control form-control-round">
+                                                    <option value="opt1" disabled selected>Select Your Store</option>
+                                                     for i in stores_list 
+                                                    <option value="{{ i.id }}">{{ i.store_name }}</option>
+                                                     endfor 
+                                                </select>
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Store Name</label>
+                                            <div class="col-sm-10">
+                                                {% for i in stores_list %}
+                                                <input type="text" class="form-control form-control-round" value="{{ i.store_name }}" readonly>
+                                                    <input type="text" class="form-control form-control-round" name="store_name" value="{{ i.id }}" hidden>
+                                                    {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Product Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-round"
+                                                    name="product_name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Category</label>
+                                            <div class="col-sm-10">
+                                                <select name="category" class="form-control form-control-round">
+                                                    <option value="opt1" disabled selected>Select Product Category
+                                                    </option>
+                                                    {% for i in categories %}
+                                                    <option value="{{ i.id }}">{{ i.category }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">MRP</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-round" name="mrp">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row input-group col-sm-10" style="left: 5cap;">
+                                            <input type="text" class="form-control form-control-round"
+                                                name="product_available_quantity" placeholder="Available Quantity">
+                                            <span class="input-group-prepend"><label class="input-group-text">
+                                                    <h6>in kgs</h6>
+                                                </label></span>
+                                        </div>
+
+                                        <div id="cuttype-section" style="margin-left: 10cap;">
+                                            <div class="form-group row align-items-center cuttype-row">
+                                                <!-- <label class="col-sm-2 col-form-label">Cut Type</label> -->
+                                                <div class="col-sm-2">
+                                                    <select class="form-control form-control-round" name="cut_type">
+                                                        <option value="opt1" disabled selected>Product Cut-Type</option>
+                                                        {% for i in cut_type %}
+                                                        <option value="{{ i.id }}">{{ i.cut_type }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <label class="col-sm-2 col-form-label">Cut Type Price</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control form-control-round"
+                                                        name="cut_type_price">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control form-control-round"
+                                                        name="is_default_price">
+                                                        <option value="opt1" disabled selected>Is_default-Price?
+                                                        </option>
+                                                        <option value="1">YES</option>
+                                                        <option value="0">NO</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button type="button" onclick="removeCutType(this)"
+                                                        class="btn btn-danger remove-field">Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center mt-3">
+                                            <button type="button" onclick="addCutType()" id="add-more"
+                                                class="btn btn-primary">Add
+                                                More</button>
+                                        </div><br>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Upload Product Image</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control form-control-round"
+                                                    name="product_image">
+                                            </div>
+                                        </div>
+
+
+                                        <!-- <div class="col-md-12">
+                                            <div class="checkbox-fade fade-in-primary">
+                                                <label>
+                                                    <input type="checkbox" name="is_todays_catch">
+                                                    <span class="cr"><i
+                                                            class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                                    <span class="text-inverse">Is Todays Catch</span>
+                                                    Check if the checkbox is ticked
+                                                    subscribe_newsletter = request.POST.get('subscribe_newsletter') is
+                                                    not None
+                                                </label>
+                                            </div>
+                                        </div> -->
+                                        <div class="row m-t-30">
+                                            <div class="col-md-12">
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            {% for i in stores_list %}
+                            <h5>Added Products - {{ i.store_name }}</h5>
+                            {% endfor %}
+                                <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                    <li><i class="fa fa-trash close-card"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block table-border-style">
+                            <div class="table-responsive">
+                                {% if added_store_products %}
+                                <table class="table table-hover" border="2">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan='2'>#</th>
+                                            <th rowspan='2'>Product-Name</th>
+                                            <th rowspan="2">Category</th>
+                                            <th rowspan='2'>MRP</th>
+                                            <th rowspan='2'>Quantity-Availability</th>
+                                            <th colspan='3'>Type & Price</th>
+                                            <th rowspan='2'>Product-Image</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Cut-Type</th>
+                                            <th>Price</th>
+                                            <th>Is_default-Price?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in added_store_products %}
+                                        {% with cut_price_count=i.store_product_cutprice_set.count %}
+                                        {% for cut_price in i.store_product_cutprice_set.all %}
+                                        <tr>
+                                            {% if forloop.first %}
+                                            <th scope="row" rowspan="{{ cut_price_count }}">{{ i.id }}</th>
+                                            <td rowspan="{{ cut_price_count }}">{{ i.product_name }}</td>
+                                            <td rowspan="{{ cut_price_count }}">{{ i.category }}</td>
+                                            <td rowspan="{{ cut_price_count }}">{{ i.mrp }}</td>
+                                            <td rowspan="{{ cut_price_count }}">{{ i.product_available_quantity }}</td>
+                                            <td>{{ cut_price.cut_type }}</td>
+                                            <td>{{ cut_price.product_price }}</td>
+                                            <td>{% if cut_price.is_default_cutprice == True %} YES {% else %} NO {% endif %}</td>
+                                            <td rowspan="{{ cut_price_count }}">
+                                                <img src="{{ i.product_image.url }}" alt="{{ i.product_name }}"
+                                                    width="50" height="50">
+                                            </td>
+                                            {% else %}
+                                            <td>{{ cut_price.cut_type }}</td>
+                                            <td>{{ cut_price.product_price }}</td>
+                                            <td>{% if cut_price.is_default_cutprice == True %} YES {% else %} NO {% endif %}</td> 
+                                            {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                                        {% endwith %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                <p>No table found</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page body end -->
+            </div>
+        </div>
+        <!-- Main-body end -->
+        <div id="styleSelector">
+
+        </div>
+    </div>
+</div>
+<script>
+
+
+
+
+    function addCutType() {
+        var cutTypeSection = document.getElementById('cuttype-section');
+        var newCutTypeRow = cutTypeSection.querySelector('.cuttype-row').cloneNode(true);
+        cutTypeSection.appendChild(newCutTypeRow);
+    }
+
+    function removeCutType(button) {
+        var cutTypeSection = document.getElementById('cuttype-section');
+        var cutTypeRows = cutTypeSection.querySelectorAll('.cuttype-row');
+
+        // Only allow removal if more than one row exists
+        if (cutTypeRows.length > 1) {
+            var cutTypeRow = button.closest('.cuttype-row');
+            if (cutTypeRow) {
+                cutTypeRow.remove();
+            }
+        } else {
+            alert("At least one field must remain.");
+        }
+    }
+
+</script>
+{% endblock %}

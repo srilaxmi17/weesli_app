@@ -1,0 +1,169 @@
+{% extends 'store_owner_register.html' %}
+{% load static %}
+{% block pg_name_title %}
+    <title>Welcome to Store Register Page</title>
+    {% endblock %}
+{% block form %}
+<section class="login-block">
+    <!-- Container-fluid starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <form class="md-float-material form-material" method="post" action="{% url 'store_register' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="text-center">
+                        <img src="{% static 'assets/images/logo.png' %}" alt="logo.png">
+                    </div>
+                    <div class="auth-box card">
+                        <div class="card-block">
+                            <div class="row m-b-20">
+                                <div class="col-md-12">
+                                    <h3 class="text-center txt-primary">Store Register Form</h3>
+                                </div>
+                            </div>
+                            <div class="form-group form-primary">
+                                <!-- <select name="store_ownwer_name" class="form-control">
+                                    <option value="opt1" disabled selected>Select store owner</option>
+                                    <option value=""></option>
+                                </select>  
+                                                               -->
+                                                               <input type="text" value="{{ stowner_name }}" class="form-control" readonly>
+                                                               <input type="hidden" name="store_ownwer_name" value="{{ store_owner_id }}">
+                                                               
+                                <span class="form-bar"></span>
+                                <!-- <label class="float-label">Choose Username</label> -->
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" name="store_name" class="form-control">
+                                <span class="form-bar"></span>
+                                <label class="float-label">Your Store name</label>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" name="store_location" class="form-control">
+                                <span class="form-bar"></span>
+                                <label class="float-label">Your Store Address</label>
+                            </div>
+                             <div class="row"> 
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <select name="state" class="form-control" id="state" onchange="filterCities()">
+                                            <option value="" disabled selected>State</option>
+                                            {% for state in states %}
+                                            <option value="{{state.id}}">{{state.state}}</option>
+                                            {% endfor %}
+                                        </select>                                
+                                        <span class="form-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <select name="city" class="form-control" id="city">
+                                            <option value="" disabled selected>City</option>
+                                            {% for city in cities %}
+                                            <option value="{{city.id}}" data-state="{{ city.state.id }}">{{city.city}}</option>
+                                            {% endfor %}
+                                        </select>                                
+                                        <span class="form-bar"></span>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="form-group form-primary">
+                                <textarea name="store_description" class="form-control"></textarea>
+                                <span class="form-bar"></span>
+                                <label class="float-label">Your Store Description</label>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="number" name="store_number" class="form-control" maxlength="10">
+                                <span class="form-bar"></span>
+                                <label class="float-label">Store Mobile Number</label>
+                            </div>
+<!--                             
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">State</label>
+                                <div class="col-sm-10">
+                                    <select name="bussiness_hour" class="form-control">
+                                        <option value="opt1">Select Bussiness Hour</option>
+                                        <option value="opt2">mon-sun 9am - 9pm</option>
+                                        <option value="opt3">mon-sat 9am - 9pm</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="number" name="latitude" class="form-control">
+                                        <span class="form-bar"></span>
+                                        <label class="float-label">latitude</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group form-primary">
+                                        <input type="number" name="longitude" class="form-control">
+                                        <span class="form-bar"></span>
+                                        <label class="float-label">longitude</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-primary">
+                                <input type="text" name="zip_code" class="form-control">
+                                <span class="form-bar"></span>
+                                <label class="float-label">zip_code</label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Store Image</label>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" name="store_image">
+                                </div>
+                            </div>
+                            <div class="row m-t-25 text-left">
+                                <!-- <div class="col-md-12">
+                                    <div class="checkbox-fade fade-in-primary">
+                                        <label>
+                                            <input type="checkbox" value="">
+                                            <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                            <span class="text-inverse">I read and accept <a href="#">Terms &amp; Conditions.</a></span>
+                                        </label>
+                                    </div>
+                                </div> -->
+                                
+                            </div>
+                            <div class="row m-t-30">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign up now</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="text-inverse text-left m-b-0">Already have an account?</p>
+                                    <p class="text-inverse text-left"><a href="{% url 'store_own_login' %}"><b>Sign In</b></a></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="{% static 'assets/images/auth/Logo-small-bottom.png' %}" alt="small-logo.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end of col-sm-12 -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <!-- end of container-fluid -->
+</section>
+<script>
+    function filterCities() {
+        const stateId = document.getElementById("state").value;
+        const citySelect = document.getElementById("city");
+    
+        // Hide all city options
+        Array.from(citySelect.options).forEach(option => {
+            option.style.display = option.getAttribute("data-state") === stateId ? "block" : "none";
+        });
+    
+        // Reset to default option
+        citySelect.value = "";
+    }
+    </script>
+{% endblock %}
